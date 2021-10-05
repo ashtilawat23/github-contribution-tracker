@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ashtilawat23/github-contribution-tracker#readme",
   "dependencies": {
-    "axios": "^0.22.0"
+    "@octokit/rest": "^18.11.4",
+    "dotenv": "^10.0.0"
   }
 }
