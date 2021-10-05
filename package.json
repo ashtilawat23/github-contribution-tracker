@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/ashtilawat23/github-contribution-tracker/issues"
   },
-  "homepage": "https://github.com/ashtilawat23/github-contribution-tracker#readme"
+  "homepage": "https://github.com/ashtilawat23/github-contribution-tracker#readme",
+  "dependencies": {
+    "axios": "^0.22.0"
+  }
 }
