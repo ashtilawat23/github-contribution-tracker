@@ -36,7 +36,7 @@ Promise.all([getCommitsbyRepo(org, test_repo)])
     .then((res) => {
         res.forEach((repo) => {
             repo.data.map((commit) => {
-                commit.sha = [...shaArray];
+                shaArray.push(commit.sha);
             })
         });
     })
@@ -44,5 +44,11 @@ Promise.all([getCommitsbyRepo(org, test_repo)])
         console.log(err);
     });
 
+// The program runs the console.log() before the promise is fulfilled. So, to delay the console.log(), a timeout was added to initiate the console.log().
+
+function displayResponseArray() {
     console.log(shaArray);
+}
+
+setTimeout(displayResponseArray, 3000);
 
