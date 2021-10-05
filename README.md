@@ -11,7 +11,7 @@ npm init -y
 npm i dotenv
 npm i @octokit/rest
 ```
-3. Create a .env.sample file to highlight the keys/tokens you need to access the API. For this project, you will need to login into GitHub and create a Personal Access Token. You can find directions to do so [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+3. Create a .env.sample file to highlight the keys/tokens you need to access the API. For this project, you will need to login into GitHub and create a Personal Access Token. You can find directions on how to create your Personal Access Token [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 4. Create a .env file and paste your access token inside. 
 5. Create a new "start" script in your package.json. 
 ```
