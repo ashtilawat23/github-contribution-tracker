@@ -1,0 +1,21 @@
+{
+  "name": "github-contribution-tracker",
+  "version": "1.0.0",
+  "description": "Node app that tracks contributions to specific GitHub repos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashtilawat23/github-contribution-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashtilawat23/github-contribution-tracker/issues"
+  },
+  "homepage": "https://github.com/ashtilawat23/github-contribution-tracker#readme"
+}
