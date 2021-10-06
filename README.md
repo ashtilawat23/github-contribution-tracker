@@ -29,5 +29,3 @@ const octokit = new Octokit({
 });
 ```
 8. Now you can use ```octokit``` to access the GitHub API. For more info on the functions you can use, check out https://octokit.github.io/rest.js/v18.
-
-## [Loom video on @Octokit/rest implementation](https://www.loom.com/share/24e52b3196864a03818dcbd041fc481e)
