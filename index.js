@@ -28,6 +28,7 @@ async function getPullsbyRepo(owner, repo) {
         repo: repo,
         state: 'all',
         sort: 'created',
+        direction: 'desc',
     });
     return pulls;
 };
