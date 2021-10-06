@@ -20,6 +20,7 @@ const repos = [
     "scribble-stadium-ds",
     "scribble-stadium-ios",
 ];
+const contributions = new Map();
 
 async function getPullsbyRepo(owner, repo) {
     const pulls = await octokit.rest.pulls.list({
@@ -40,11 +41,23 @@ function getPromiseArray(repos) {
     return output;
 };
 
+function filterPullsbyDateCreated(isoString, numMonths) {
+    const oneDay = 24 * 60 * 60 * 1000;
+    const today = new Date();
+    const createdAt = new Date(isoString);
+    console.log(createdAt);
+    const elapsedTimeInDays = Math.round(Math.abs((today - createdAt) / oneDay));
+    return elapsedTimeInDays <= numMonths*30;
+};
+
 Promise.all(getPromiseArray(repos))
     .then((res) => {
+        const today = new Date(); 
         res.forEach((repo) => {
             repo.data.map((pull) => {
-                console.log(pull.url);
+                if (filterPullsbyDateCreated(pull.created_at, 3)){
+                    console.log(pull.user.login);
+                };
             })
         });
     })
