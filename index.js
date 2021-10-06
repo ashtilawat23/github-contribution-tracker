@@ -5,38 +5,46 @@ const octokit = new Octokit({
     auth: process.env.PERSONAL_GITHUB_ACCESS_TOKEN,
 });
 
-const org = "Lambda-School-Labs";
-const test_repo = "family-promise-service-tracker-fe-a";
-let shaArray = [];
+const org = process.env.GITHUB_ORG;
+const repos = [
+    "family-promise-service-tracker-fe-a", 
+    "family-promise-service-tracker-be-a",
+    "human-rights-first-police-fe-a",
+    "human-rights-first-police-be-a",
+    "human-rights-first-police-ds-a",
+    "human-rights-first-asylum-fe-a",
+    "human-rights-first-asylum-be-a",
+    "human-rights-first-asylum-ds-a",
+    "scribble-stadium-fe",
+    "scribble-stadium-be",
+    "scribble-stadium-ds",
+    "scribble-stadium-ios",
+];
 
-// // Code to log commit sha's from the GitHub API 
-// octokit.rest.repos.listCommits({
-//     owner: "Lambda-School-Labs",
-//     repo: "family-promise-service-tracker-fe-a"
-// })
-// .then( (res) => {
-//     res.data.forEach((commit) => {
-//         console.log(commit.sha);
-//     });
-// })
-// .catch( (err) => {
-//     console.log(err);
-// });
-
-async function getCommitsbyRepo(owner, repo) {
-    const commits = await octokit.rest.repos.listCommits({
+async function getPullsbyRepo(owner, repo) {
+    const pulls = await octokit.rest.pulls.list({
         owner: owner,
-        repo: repo
+        repo: repo,
+        state: 'all',
+        sort: 'created',
     });
-    return commits;
-}
+    return pulls;
+};
 
+function getPromiseArray(repos, getPullsbyRepo) {
+    const output = [];
+    repos.forEach((repo) => {
+        const promise = getPullsbyRepo(org, repo);
+        output.push(promise);
+    })
+    return output;
+};
 
-Promise.all([getCommitsbyRepo(org, test_repo)])
+Promise.all(getPromiseArray(repos))
     .then((res) => {
         res.forEach((repo) => {
-            repo.data.map((commit) => {
-                shaArray.push(commit.sha);
+            repo.data.map((pull) => {
+                console.log(pull.url);
             })
         });
     })
@@ -44,11 +52,4 @@ Promise.all([getCommitsbyRepo(org, test_repo)])
         console.log(err);
     });
 
-// The program runs the console.log() before the promise is fulfilled. So, to delay the console.log(), a timeout was added to initiate the console.log().
-
-function displayResponseArray() {
-    console.log(shaArray);
-}
-
-setTimeout(displayResponseArray, 3000);
 
