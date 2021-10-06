@@ -31,7 +31,7 @@ async function getPullsbyRepo(owner, repo) {
     return pulls;
 };
 
-function getPromiseArray(repos, getPullsbyRepo) {
+function getPromiseArray(repos) {
     const output = [];
     repos.forEach((repo) => {
         const promise = getPullsbyRepo(org, repo);
