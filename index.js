@@ -46,7 +46,6 @@ function filterPullsbyDateCreated(isoString, numMonths) {
     const oneDay = 24 * 60 * 60 * 1000;
     const today = new Date();
     const createdAt = new Date(isoString);
-    console.log(createdAt);
     const elapsedTimeInDays = Math.round(Math.abs((today - createdAt) / oneDay));
     return elapsedTimeInDays <= numMonths*30;
 };
@@ -57,7 +56,12 @@ Promise.all(getPromiseArray(repos))
         res.forEach((repo) => {
             repo.data.map((pull) => {
                 if (filterPullsbyDateCreated(pull.created_at, 3)){
-                    console.log(pull.user.login);
+                    if (contributions.has(pull.user.login)) {
+                        contributions.set(pull.user.login, contributions.get(pull.user.login) + 1)
+                    }
+                    else {
+                        contributions.set(pull.user.login,1);
+                    }
                 };
             })
         });
@@ -65,5 +69,11 @@ Promise.all(getPromiseArray(repos))
     .catch((err) => {
         console.log(err);
     });
+
+function testScript() {
+    console.log(contributions);
+};
+
+setTimeout(testScript,3000);
 
 
